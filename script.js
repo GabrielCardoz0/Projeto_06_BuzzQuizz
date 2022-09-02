@@ -54,7 +54,6 @@ function carregarPerguntas() {
     }
 }
 
-
 function prosseguirParaNiveis(botaoProsseguirNiveis) {
     alert('está funcionando');
 }
