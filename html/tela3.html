@@ -6,20 +6,129 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto 6 - BuzzQuizz</title>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="tela3.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/tela3.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <h1>Olá, esse é um teste</h1>
+
+    <div class="top-bar">BuzzQuizz</div>
+
+
+
+    <div class="container escondido">
+
+        <span class="ComeceComeço">Comece pelo começo</span>
+
+        <div class="DivQuizzInputs">
+            <input type="text" placeholder="Título do seu quizz (mín 20 caracteres)" class="tituloDoQuizz" value=""
+                minlength="20" maxlength="65">
+            <input type="url" placeholder="URL da imagem do seu quiz" class="urlImagemQuizz" value="">
+            <input type="text" placeholder="Quantidade de perguntas do quizz (mín 3)" class="quantidadeDePerguntas"
+                value="" minlength="1" maxlength="2">
+            <input type="text" placeholder="Quantidade de níveis do quizz (mín 2)" class="quantidadeDeNiveis" value="">
+        </div>
+
+        <div class="botaoCriarPergunta" onclick="prosseguirTelaPerguntas(this)">Prosseguir para criar Quizz</div>
+
+    </div>
+
+
+
+    <div class="criePerguntas ">
+
+        <span class="ComeceComeço">Crie suas perguntas</span>
+
+        <!--
+        <div class="conteudoPergunta">
+
+            <span>Pergunta 1</span>
+
+            <input type="text" placeholder="Texto da pergunta" minlength="20">
+            <input type="text" placeholder="Cor de fundo da pergunta (hexadecimal #XXXXXX)">
+
+            <span>Resposta correta</span>
+            <input type="text" placeholder="Resposta correta">
+            <input type="url" name="" id="" placeholder="URL da imagem">
+
+            <span>Respostas incorretas (ao menos duas)</span>
+            <input type="text" placeholder="Resposta incorreta 1">
+            <input type="url" name="" id="" placeholder="URL da imagem 1">
+
+            <input type="text" placeholder="Resposta incorreta 2">
+            <input type="url" name="" id="" placeholder="URL da imagem 2">
+
+            <input type="text" placeholder="Resposta incorreta 3">
+            <input type="url" name="" id="" placeholder="URL da imagem 3">
+
+        </div>
+        -->
+
+        <ul class="ListaCaixaPerguntas">
+
+            <li class="perguntaN">
+                <span>Pergunta 1</span>
+                <ion-icon name="create-outline"></ion-icon>
+            </li>
+
+        </ul>
+
+
+        <div class="botaoCriarNiveis" onclick="prosseguirParaNiveis(this)">Prosseguir para criar níveis</div>
+
+    </div>
+
+
+
+    <div class="decidaNiveis escondido">
+
+        <span class="ComeceComeço">Agora, decida os níveis!</span>
+
+        <div class="conteudoNivel">
+            <span>Nível 1</span>
+            <input type="text" placeholder="Título do nível" minlength="10">
+            <input type="text" placeholder="% de acerto mínima (entre 0 e 100%)">
+            <input type="url" name="" id="" placeholder="URL da imagem do nível">
+            <input type="text" placeholder="Descrição do nível" minlength="30">
+            <textarea name="" id="" cols="10" rows="4" placeholder="Descrição do nível"></textarea>
+        </div>
+
+        <div class="nivelN">
+            <span>Nivel 1</span>
+            <ion-icon name="create-outline"></ion-icon>
+        </div>
+
+        <div class="finalizarQuizz">Finalizar Quizz</div>
+
+    </div>
+
+
+
+    <div class="quizzPronto escondido">
+        <span class="ComeceComeço">Seu quizz está pronto!</span>
+
+        <div class="imagemQuizz">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUiiq4LRrvYkcZvKOz4Z7FuET5FKjtT5KohifApdabLFFEXGxKVWUGpA11Vznxr1CQtT0&usqp=CAU"
+                alt="">
+
+            <span>Título do quizz</span>
+        </div>
+
+        <div class="acessarQuizz">Acessar Quizz</div>
+
+        <div class="voltarHome">Voltar para home</div>
+
+    </div>
 
 
 
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 </html>
