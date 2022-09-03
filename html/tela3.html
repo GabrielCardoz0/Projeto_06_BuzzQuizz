@@ -24,25 +24,25 @@
         <span class="ComeceComeço">Comece pelo começo</span>
 
         <div class="DivQuizzInputs">
-            <input type="text" placeholder="Título do seu quizz" class="tituloDoQuizz" value="" minlength="20"
-                maxlength="65">
+            <input type="text" placeholder="Título do seu quizz (mín 20 caracteres)" class="tituloDoQuizz" value=""
+                minlength="20" maxlength="65">
             <input type="url" placeholder="URL da imagem do seu quiz" class="urlImagemQuizz" value="">
-            <input type="text" placeholder="Quantidade de perguntas do quizz (mínimo 3)" class="quantidadeDePerguntas"
+            <input type="text" placeholder="Quantidade de perguntas do quizz (mín 3)" class="quantidadeDePerguntas"
                 value="" minlength="1" maxlength="2">
-            <input type="text" placeholder="Quantidade de níveis do quizz (mínimo 2)" class="quantidadeDeNiveis"
-                value="">
+            <input type="text" placeholder="Quantidade de níveis do quizz (mín 2)" class="quantidadeDeNiveis" value="">
         </div>
 
-        <div class="botaoCriarPergunta">Prosseguir para criar Quizz</div>
+        <div class="botaoCriarPergunta" onclick="prosseguirTelaPerguntas(this)">Prosseguir para criar Quizz</div>
 
     </div>
 
 
 
-    <div class="criePerguntas escondido">
+    <div class="criePerguntas ">
 
         <span class="ComeceComeço">Crie suas perguntas</span>
 
+        <!--
         <div class="conteudoPergunta">
 
             <span>Pergunta 1</span>
@@ -65,22 +65,19 @@
             <input type="url" name="" id="" placeholder="URL da imagem 3">
 
         </div>
+        -->
 
-        <div class="perguntaN">
-            <span>Pergunta 1</span>
-            <ion-icon name="create-outline"></ion-icon>
-        </div>
-        <div class="perguntaN">
-            <span>Pergunta 1</span>
-            <ion-icon name="create-outline"></ion-icon>
-        </div>
-        <div class="perguntaN">
-            <span>Pergunta 1</span>
-            <ion-icon name="create-outline"></ion-icon>
-        </div>
+        <ul class="ListaCaixaPerguntas">
+
+            <li class="perguntaN">
+                <span>Pergunta 1</span>
+                <ion-icon name="create-outline"></ion-icon>
+            </li>
+
+        </ul>
 
 
-        <div class="botaoCriarNiveis">Prosseguir para criar níveis</div>
+        <div class="botaoCriarNiveis" onclick="prosseguirParaNiveis(this)">Prosseguir para criar níveis</div>
 
     </div>
 
