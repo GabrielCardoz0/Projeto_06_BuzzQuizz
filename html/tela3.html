@@ -19,7 +19,7 @@
 
 
 
-    <div class="container escondido">
+    <div class="container escondido ">
 
         <span class="ComeceComeço">Comece pelo começo</span>
 
@@ -38,40 +38,38 @@
 
 
 
-    <div class="criePerguntas ">
+    <div class="criePerguntas escondido">
 
         <span class="ComeceComeço">Crie suas perguntas</span>
 
-        <!--
-        <div class="conteudoPergunta">
-
-            <span>Pergunta 1</span>
-
-            <input type="text" placeholder="Texto da pergunta" minlength="20">
-            <input type="text" placeholder="Cor de fundo da pergunta (hexadecimal #XXXXXX)">
-
-            <span>Resposta correta</span>
-            <input type="text" placeholder="Resposta correta">
-            <input type="url" name="" id="" placeholder="URL da imagem">
-
-            <span>Respostas incorretas (ao menos duas)</span>
-            <input type="text" placeholder="Resposta incorreta 1">
-            <input type="url" name="" id="" placeholder="URL da imagem 1">
-
-            <input type="text" placeholder="Resposta incorreta 2">
-            <input type="url" name="" id="" placeholder="URL da imagem 2">
-
-            <input type="text" placeholder="Resposta incorreta 3">
-            <input type="url" name="" id="" placeholder="URL da imagem 3">
-
-        </div>
-        -->
-
         <ul class="ListaCaixaPerguntas">
-
+            <!--
             <li class="perguntaN">
+                <span>Pergunta N</span>
+                <ion-icon name="create-outline" onclick="editarPergunta(this)"></ion-icon>
+            </li>
+            
+            -->
+            <li class="conteudoPergunta">
+
                 <span>Pergunta 1</span>
-                <ion-icon name="create-outline"></ion-icon>
+
+                <input type="text" placeholder="Texto da pergunta" minlength="20">
+                <input type="text" maxlength="7" placeholder="Cor de fundo da pergunta (hexadecimal #XXXXXX)">
+
+                <span>Resposta correta</span>
+                <input type="text" placeholder="Resposta correta">
+                <input type="url" name="" id="" placeholder="URL da imagem">
+
+                <span>Respostas incorretas (ao menos duas)</span>
+                <input type="text" placeholder="Resposta incorreta 1">
+                <input type="url" name="" id="" placeholder="URL da imagem 1">
+
+                <input type="text" placeholder="Resposta incorreta 2">
+                <input type="url" name="" id="" placeholder="URL da imagem 2">
+
+                <input type="text" placeholder="Resposta incorreta 3">
+                <input type="url" name="" id="" placeholder="URL da imagem 3">
             </li>
 
         </ul>
