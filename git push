@@ -1,0 +1,111 @@
+[33mcommit 2201df1af2533c8ae8e9489b80fbe9b1c2412b94[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Victoria <vic_andrade_@hotmail.com>
+Date:   Sat Sep 3 14:25:46 2022 -0300
+
+    Versão com listar um quizz
+
+[33mcommit dd5fa58cd9529574670c1f7e972b66304791b926[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 7980bb9 17598dd
+Author: Victoria <vic_andrade_@hotmail.com>
+Date:   Fri Sep 2 20:25:06 2022 -0300
+
+    HTML e CSS da tela de quizz
+
+[33mcommit 7980bb9c2cdfef0f68a477e2561ed74d5856fb0d[m
+Author: Victoria <vic_andrade_@hotmail.com>
+Date:   Fri Sep 2 18:45:33 2022 -0300
+
+    HTML e CSS da tela de quizz
+
+[33mcommit 17598ddf59ba38ba81695f32dea134416f3a9251[m
+Author: Gabriel <gabriel.scardozo7@gmail.com>
+Date:   Fri Sep 2 18:10:47 2022 -0300
+
+    informacoes basicas
+
+[33mcommit 5888b29f297706d949d36aa435aa524144504245[m
+Merge: 4c1bb24 c9d8d7c
+Author: Gabriel <gabriel.scardozo7@gmail.com>
+Date:   Fri Sep 2 18:09:39 2022 -0300
+
+    Merge branch 'main' of https://github.com/GabrielCardoz0/Projeto_06_BuzzQuizz
+
+[33mcommit 4c1bb24b17984a949cc5409696e16fd22c200ae8[m
+Author: Gabriel <gabriel.scardozo7@gmail.com>
+Date:   Fri Sep 2 18:09:20 2022 -0300
+
+    informacoes basicas
+
+[33mcommit c9d8d7cc3dd4442787471afd8c8badee09036179[m
+Author: Ana Packer <anaamaria.packer@gmail.com>
+Date:   Fri Sep 2 18:02:57 2022 -0300
+
+    finalizado layout tela 1, css e html
+
+[33mcommit 0e2d4de3e7e4449610d15c1ba47345fb0ed84991[m
+Merge: bb8b471 7e89f39
+Author: Ana Packer <anaamaria.packer@gmail.com>
+Date:   Fri Sep 2 18:01:17 2022 -0300
+
+    Merge branch 'main' of https://github.com/GabrielCardoz0/Projeto_06_BuzzQuizz
+
+[33mcommit bb8b471233f04618e83c4ebab95736a26e0a82a4[m
+Author: Ana Packer <anaamaria.packer@gmail.com>
+Date:   Fri Sep 2 16:51:15 2022 -0300
+
+    layout finalizado
+
+[33mcommit 7e89f39c9ae2ae3e2f605dda9536bf63f0a04c62[m
+Merge: e85c806 b957a6a
+Author: Gabriel <gabriel.scardozo7@gmail.com>
+Date:   Thu Sep 1 11:32:15 2022 -0300
+
+    Merge branch 'main' of https://github.com/GabrielCardoz0/Projeto_06_BuzzQuizz
+
+[33mcommit e85c806f1ccb38d5ea7466170c6b524de95e0ca4[m
+Author: Gabriel <gabriel.scardozo7@gmail.com>
+Date:   Thu Sep 1 11:32:05 2022 -0300
+
+    layout página 3 finalizado
+
+[33mcommit b957a6a6922392725e3dace71f528f6a00efdefa[m
+Author: Ana Packer <anaamaria.packer@gmail.com>
+Date:   Wed Aug 31 12:53:05 2022 -0300
+
+    fix:amrrumadas as importações dos scripts
+
+[33mcommit dc2cbbf8e8b45f359f088a5738215ea802fa0fbe[m
+Author: Ana Packer <anaamaria.packer@gmail.com>
+Date:   Wed Aug 31 12:45:20 2022 -0300
+
+    fix:arrumas as importações dos arquivos css
+
+[33mcommit 4abc081d7f670e47e9c208dd429a907cacabe5af[m
+Author: Victoria <vic_andrade_@hotmail.com>
+Date:   Wed Aug 31 12:30:02 2022 -0300
+
+    Criação das pastas de html e css
+
+[33mcommit f1f36c7c9e7b5e6d68dbe9009fc9f1ecc424778c[m
+Author: Gabriel <gabriel.scardozo7@gmail.com>
+Date:   Wed Aug 31 12:05:11 2022 -0300
+
+    html link para css e style
+
+[33mcommit 3e9484e59a84085d3145b0bd4cd0505cbe0681af[m
+Author: Gabriel <gabriel.scardozo7@gmail.com>
+Date:   Wed Aug 31 12:03:23 2022 -0300
+
+    html link para css e style
+
+[33mcommit ff8de9e754abe00cb5ba70ec640b4115eb4d2207[m
+Author: Gabriel <gabriel.scardozo7@gmail.com>
+Date:   Wed Aug 31 12:01:38 2022 -0300
+
+    html link para css e style
+
+[33mcommit 0197abe9cddbd38bcef9030eab4cda3d36d1134d[m
+Author: Gabriel <gabriel.scardozo7@gmail.com>
+Date:   Wed Aug 31 11:50:56 2022 -0300
+
+    first commit

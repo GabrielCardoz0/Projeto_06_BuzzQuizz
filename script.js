@@ -179,12 +179,16 @@ const verificarPerguntasCriadas = function () {
 
 
 //Script Victoria//
-let qtdPerguntas
-function responder() {
+    let qtdPerguntas
+
+    function responder(){
+
     const quizz = document.querySelector(".main")
+
     axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/11783')
-        // ALTERAR ID BASEADO NA TELA 1 !
-        .then(response => {
+    // ALTERAR ID BASEADO NA TELA 1 !
+
+    .then(response => {
             let item = response.data;
 
             let add = `<div class="titulo">
@@ -194,60 +198,68 @@ function responder() {
 
             qtdPerguntas = item.questions.length;
 
-            for (var i = 0; i < item.questions.length; i++) {
+            for (var i = 0; i < item.questions.length; i++)
+            {
                 add += `<div class="quizz">
                 <div class="pergunta">
                     <div class="cabecalho" style="background-color:${item.questions[i].color}">
                         <p class="ctitulo">${item.questions[i].title}</p>
                     </div>`
 
-                let contador = 0;
-                let quantidadeDePerguntas = item.questions[i].answers.length;
-                for (var j = 0; j < quantidadeDePerguntas; j++) {
-                    contador++;
-                    if (contador == 1) {
-                        add += `<div class="quadro">
-                            <div class="resposta quiz${i}${j}">
+                    let contador = 0;
+                    let quantidadeDePerguntas = item.questions[i].answers.length;
+                    for (var j = 0; j < quantidadeDePerguntas; j++)
+                    {
+                        contador++;
+                        if(contador == 1){
+                            add += `<div class="quadro">
+                            <div class="resposta ${item.questions[i].answers[j].isCorrectAnswer} quiz${i}${j}">
                             <img src="${item.questions[i].answers[j].image}" alt="quiz${i}${j}">
                             <p class="paragrafo">${item.questions[i].answers[j].text}</p>
                             </div>`
-                        if (quantidadeDePerguntas == 3) {
-                            add += `</div>
-                                </div>`
+                            if(quantidadeDePerguntas == 3)
+                            {
+                                add += `</div>
+                                </div>`   
+                            }
                         }
-                    }
-                    if (contador == 2) {
-                        add += `<div class="resposta quiz${i}${j}">
+                        if(contador == 2)
+                        {
+                        add += `<div class="resposta ${item.questions[i].answers[j].isCorrectAnswer} quiz${i}${j}">
                             <img src="${item.questions[i].answers[j].image}" alt="quiz${i}${j}">
                             <p class="paragrafo">${item.questions[i].answers[j].text}</p>
                             </div>
                             </div>`
 
-                        if (quantidadeDePerguntas == 2 || j == 3) {
-                            add += `</div>
-                                </div>`
-                        }
+                            if(quantidadeDePerguntas == 2 || j == 3)
+                            {
+                                add += `</div>
+                                </div>`   
+                            }
 
                         contador = 0;
-                    }
+                        }
 
-                }
+                    }
             }
 
-            quizz.innerHTML = add
-            console.log('fui adicionado')
+                quizz.innerHTML = add
+                console.log('fui adicionado')
         })
+
         .catch(error => {
             console.log(`responder: ${error}`)
-        });
+        }); 
 }
 
 
 responder();
 
-const main = document.querySelector('.main')
-let contador = 0;
-main.addEventListener("click", function (e) {
+
+    const main = document.querySelector('.main')
+    let contador = 0;
+
+    main.addEventListener("click", function (e) {
     let alt = e.srcElement.alt
     if (!alt.includes('quiz') || alt.length == 0) {
         return;
@@ -255,7 +267,80 @@ main.addEventListener("click", function (e) {
 
     let resposta_click = document.querySelector(`.${alt}`)
     resposta_click.classList.add("escolhido");
-    console.log(e.srcElement.alt)
-});
+
+    let resposta = document.querySelectorAll('.resposta')
+    for(let i = 0; i < resposta.length; i++)
+    {
+        console.log()
+        if(!resposta[i].className.includes('escolhido'))
+            {
+                if(alt[4] == resposta[i].className.split('quiz')[1][0])
+                {
+                    resposta[i].classList.add("desabilitado");
+                }
+                
+            }
+        
+        if(!resposta[i].className.includes('true'))
+        {
+            if(alt[4] == resposta[i].className.split('quiz')[1][0])
+            {
+                resposta[i].classList.add("errado");
+            }
+            
+        }
+
+        else if(resposta[i].className.includes('true'))
+        {
+            if(alt[4] == resposta[i].className.split('quiz')[1][0])
+            {
+                resposta[i].classList.add("certo");
+            }
+        }
+    }
+    
+  });
+
+    
+    const botaoReiniciar = document.querySelector('.reiniciar')
+
+    botaoReiniciar.addEventListener("click", function(e)
+    {
+    const reiniciar = document.querySelector('div:last-child');
+
+    reiniciar.scrollIntoView({block: "end", behavior: "smooth"});
+
+    let resposta = document.querySelectorAll('.resposta')
+
+    for(i = 0; i < resposta.length; i++){
+
+        if(resposta[i].className.includes('certo')){
+            resposta[i].classList.remove('certo')
+    }
+        else if(resposta[i].className.includes('errado')){
+            resposta[i].classList.remove('errado')
+    }
+
+    if(resposta[i].className.includes('desabilitado')){
+            resposta[i].classList.remove('desabilitado')
+    }
+        else if(resposta[i].className.includes('escolhido')){
+            resposta[i].classList.remove('escolhido')
+    }}
+
+    })
+
+
+    const botaoHome = document.querySelector('.home')
+    
+    botaoHome.addEventListener("click", function(e){
+        window.location = 'tela1.html'})
+
+
+    function mostrarResultado (){
+            
+    }
+
+
 
 //Script Victoria//
