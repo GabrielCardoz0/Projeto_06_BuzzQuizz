@@ -40,20 +40,38 @@ carregarQuizzes();
 
 
 
-/*Script Gabriel*/
-
+/* inicio Script Gabriel*/
 
 /*--------------Variáveis globais-----------------*/
-
 let tituloDoQuizz;
 let urlImagemQuizz;
 let quantidadePerguntasQuizz;
 let niveisQuizz;
-
-
+let perguntasPreenchidas = 0;
+let quantidadeDeNiveisCompletos = 0;
 const listaPerguntas = [];
-/*-----------------------------------------------*/
+let ObjetoQuizz = {
+    title: '',
+    image: '',
+    questions: [
 
+    ],
+    levels: [
+        {
+            title: "Título do nível 1",
+            image: "https://http.cat/411.jpg",
+            text: "Descrição do nível 1",
+            minValue: 0
+        },
+        {
+            title: "Título do nível 2",
+            image: "https://http.cat/412.jpg",
+            text: "Descrição do nível 2",
+            minValue: 50
+        }
+    ]
+}
+/*-----------------------------------------------*/
 function urlValidar(string) {
     try {
         let url = new URL(string);
@@ -63,20 +81,17 @@ function urlValidar(string) {
     }
 }
 
-
 function prosseguirTelaPerguntas(botaoProsseguirPerguntas) {
     tituloDoQuizz = document.querySelector('.tituloDoQuizz').value;
     urlImagemQuizz = document.querySelector('.urlImagemQuizz').value;
     quantidadePerguntasQuizz = document.querySelector('.quantidadeDePerguntas').value;
     niveisQuizz = document.querySelector('.quantidadeDeNiveis').value;
-
-
     if (tituloDoQuizz.length > 20 && urlValidar(urlImagemQuizz) && quantidadePerguntasQuizz >= 3 && niveisQuizz >= 2) {
-
         botaoProsseguirPerguntas.parentNode.classList.add('escondido');
         document.querySelector('.criePerguntas').classList.remove('escondido');
         carregarPerguntas();
-
+        ObjetoQuizz.title = tituloDoQuizz;
+        ObjetoQuizz.image = urlImagemQuizz;
     } else {
         alert('Erro. Favor verifique se os campos abaixo foram preenchidos corretamente.');
     }
@@ -97,8 +112,6 @@ function carregarPerguntas() {
     }
 }
 
-
-
 function editarPergunta(item) {
     const numResposta = item.parentNode.querySelector('span');
 
@@ -107,7 +120,7 @@ function editarPergunta(item) {
     item.parentNode.innerHTML = `<span>${numResposta.innerHTML}</span>
 
     <input type="text" placeholder="Texto da pergunta" minlength="20">
-    <input type="text" placeholder="Cor de fundo da pergunta (hexadecimal #XXXXXX)">
+    <input type="color" placeholder="Cor de fundo da pergunta (hexadecimal #XXXXXX)">
 
     <span>Resposta correta</span>
     <input type="text" placeholder="Resposta correta">
@@ -126,37 +139,61 @@ function editarPergunta(item) {
 }
 
 
-let perguntasPreenchidas = 0;
-let tudoCerto = false;
 
 function prosseguirParaNiveis(botaoProsseguirNiveis) {
-    /*-------------veriricar dados---------------*/
 
-    let ulPai = document.querySelector('.ListaCaixaPerguntas');
-
+    const ulPai = document.querySelector('.ListaCaixaPerguntas');
+    let tudoCerto = false;
     for (let i = 0; i < quantidadePerguntasQuizz; i++) {
-
         const filhoUl = ulPai.children[i];
 
-
-        const corFundo = filhoUl.children[2].value != '';
-
         const textoPergunta1 = filhoUl.children[1].value.length > 20;
+        const corFundo = filhoUl.children[2].value;
+
         const respostaCorreta1 = filhoUl.children[4].value != '';
         const urlImagemPergunta = urlValidar(filhoUl.children[5].value);
+
         const respostaIncorreta1 = filhoUl.children[7].value != '';
         const urlIncorreta1 = urlValidar(filhoUl.children[8].value);
+
         const respostaIncorreta2 = filhoUl.children[9].value != '';
         const urlIncorreta2 = urlValidar(filhoUl.children[10].value);
+
         const respostaIncorreta3 = filhoUl.children[11].value != '';
         const urlIncorreta3 = urlValidar(filhoUl.children[12].value);
 
-        tudoCerto = textoPergunta1 && respostaCorreta1 && urlImagemPergunta && respostaIncorreta1 && urlIncorreta1 && respostaIncorreta2 && urlIncorreta2 && respostaIncorreta3 && urlIncorreta3;
+        tudoCerto = (textoPergunta1 && respostaCorreta1 && urlImagemPergunta) && ((respostaIncorreta1 && urlIncorreta1) || (respostaIncorreta2 && urlIncorreta2) || (respostaIncorreta3 && urlIncorreta3));
 
         if (tudoCerto == true) {
             perguntasPreenchidas = perguntasPreenchidas + 1;
-        } else {
-            perguntasPreenchidas = 0;
+
+            ObjetoQuizz.questions.push({
+                title: filhoUl.children[1].value,
+                color: corFundo,
+                answers: [
+                    {
+                        text: filhoUl.children[4].value,
+                        image: filhoUl.children[5].value,
+                        isCorrectAnswer: true
+                    },
+                    {
+                        text: filhoUl.children[7].value,
+                        image: filhoUl.children[8].value,
+                        isCorrectAnswer: false
+                    },
+                    {
+                        text: filhoUl.children[9].value,
+                        image: filhoUl.children[10].value,
+                        isCorrectAnswer: false
+                    },
+                    {
+                        text: filhoUl.children[11].value,
+                        image: filhoUl.children[12].value,
+                        isCorrectAnswer: false
+                    }
+                ]
+            });
+
         }
     }
     verificarPerguntasCriadas();
@@ -164,15 +201,95 @@ function prosseguirParaNiveis(botaoProsseguirNiveis) {
 
 const verificarPerguntasCriadas = function () {
     if (perguntasPreenchidas == quantidadePerguntasQuizz) {
-        alert('Tudo certo');
+        const telaCriarPerguntas = document.querySelector('.criePerguntas');
+        const telaCriarNiveis = document.querySelector('.decidaNiveis');
+        telaCriarPerguntas.classList.add('escondido');
+        telaCriarNiveis.classList.remove('escondido');
+        adicionarNiveisTela();
     } else if (perguntasPreenchidas != quantidadePerguntasQuizz) {
         alert('Há algo de errado. Por favor verifique se todos os campos estão preenchidos corretamente');
     }
-    console.log(perguntasPreenchidas);
-    console.log(tudoCerto);
+    perguntasPreenchidas = 0;
 }
 
-/*Fim do script Gabriel*/
+
+
+function adicionarNiveisTela() {
+    ulPaiNiveis = document.querySelector('.listaDeNiveis');
+    for (let i = 0; i < niveisQuizz; i++) {
+        ulPaiNiveis.innerHTML +=
+            `<div class="nivelN">
+        <span>Nivel ${i + 1}</span>
+        <ion-icon name="create-outline" onclick="editarNível(this)"></ion-icon>
+    </div>`
+    }
+}
+
+function editarNível(elemento) {
+    elemento.parentNode.classList.remove('nivelN');
+    elemento.parentNode.classList.add('conteudoNivel');
+    elemento.parentNode.innerHTML = `<span>${elemento.parentNode.querySelector('span').innerHTML}</span>
+    <input type="text" placeholder="Título do nível (mín 10 caracteres)">
+    <input type="text" placeholder="% de acerto mínima (entre 0 e 100%)" maxlength = 3>
+    <input type="url" name="" id="" placeholder="URL da imagem do nível">
+    <textarea cols="10" rows="4" placeholder="Descrição do nível (mín 30 caracteres)"></textarea>`;
+}
+
+function verificarInformacoes() {
+    let tudoCertinho = false;
+
+    let ulNiveis = document.querySelector('.listaDeNiveis');
+
+    for (let i = 0; i <= niveisQuizz; i++) {
+
+        const filho = ulNiveis.children[i];
+        const classe = filho.className;
+
+        if (classe != 'nivelN') {
+            const tituloDoNivel = filho.children[1].value.length > 10;
+            const porcentagemDeAcertos = filho.children[2].value > 0 && filho.children[2].value <= 100;
+            const imagemDoNivel = urlValidar(filho.children[3].value);
+            const descricaoDoNivel = filho.children[4].value.length >= 30;
+
+            tudoCertinho = tituloDoNivel && porcentagemDeAcertos && imagemDoNivel && descricaoDoNivel;
+
+            if (tudoCertinho == true && quantidadeDeNiveisCompletos == i) {
+                quantidadeDeNiveisCompletos++;
+            }
+        }
+    }
+    if (quantidadeDeNiveisCompletos >= niveisQuizz) {
+        const telaNiveis = document.querySelector('.decidaNiveis');
+        const telaQuizzPronto = document.querySelector('.quizzPronto');
+        telaNiveis.classList.add('escondido');
+        telaQuizzPronto.classList.remove('escondido');
+
+        const divFilho = telaQuizzPronto.querySelector('.imagemQuizz');
+        divFilho.innerHTML += `<img src="${urlImagemQuizz}"
+        alt="">
+        <span>${tituloDoQuizz}</span>`
+
+    } else {
+        alert('Erro. Favor verifique se as informações abaixo foram preenchidas corretamente');
+    }
+}
+
+
+
+function fecharPáginaHTML3() {
+    const bodyPagina3 = document.querySelector('.top-bar')
+    bodyPagina3.parentNode.classList.add('escondido');
+}
+
+/*----------------Fim do script Gabriel-------------------------------*/
+
+
+
+
+
+
+
+
 
 
 
@@ -259,3 +376,6 @@ main.addEventListener("click", function (e) {
 });
 
 //Script Victoria//
+
+
+
