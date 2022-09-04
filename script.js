@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // script Ana
 
 function carregarQuizzes() {
@@ -38,42 +36,8 @@ carregarQuizzes();
 
 
 
->>>>>>> d07a443642c52289f37656c30cb0721d35ae331a
-/ script Ana 
-
-function carregarQuizzes() {
-    const promessa = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
-    promessa.then(renderizarQuizzes);
-
-}
 
 
-function renderizarQuizzes(resposta) {
-    console.log(resposta.data);
-
-    const todosQuizzes = resposta.data;
-
-    const ul = document.querySelector(".box-quizzes");
-
-    for (let i = 0; i < todosQuizzes.length; i++) {
-        ul.innerHTML += `
-                    <li class="caixa-quizz">
-                        <div class="gradient"></div>
-                        <img src="${todosQuizzes[i].image}" />
-                        <span>${todosQuizzes[i].title}</span>
-                    </li>
-        `;
-
-
-    }
-
-
-
-}
-
-carregarQuizzes();
-
-// fim script Ana 
 
 
 /*Script Gabriel*/
@@ -210,8 +174,10 @@ const verificarPerguntasCriadas = function () {
 
 /*Fim do script Gabriel*/
 
-<<<<<<< HEAD
-=======
+
+
+
+
 //Script Victoria//
 let qtdPerguntas
 function responder() {
@@ -293,4 +259,3 @@ main.addEventListener("click", function (e) {
 });
 
 //Script Victoria//
->>>>>>> d07a443642c52289f37656c30cb0721d35ae331a
