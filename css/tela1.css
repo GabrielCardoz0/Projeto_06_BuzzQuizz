@@ -51,6 +51,12 @@ main{
     margin-top: 150px;
 
 }
+.box-quizzes-criados{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
 .text-criar-quizz{
     text-align: center;
     width: 230px; 
@@ -79,6 +85,7 @@ button{
     
 }
 
+
 .box-quizzes-criados{
     width: 1047px;
     display: flex;
@@ -89,9 +96,6 @@ button{
     margin-top: 150px;
 }
 
-
-
-
 .container-quizzes{
 
     display: flex;
@@ -101,7 +105,7 @@ button{
 }
 
 
-.todos-os-quizzes {
+p {
     font-size: 15px;
     margin-left: 10px;
 }
