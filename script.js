@@ -32,6 +32,23 @@ function renderizarQuizzes(resposta) {
 
 carregarQuizzes();
 
+function identicarMeusQuizzes(todosQuizzes) {
+
+    const meusQuizzesString = localStorage.getItem("Meus_Quizzes");
+    const meusQuizzesArray = JSON.parse(meusQuizzesString);
+
+    for (let i = 0; i < todosQuizzes.length; i++) {
+        for (let j = 0; j < meusQuizzesArray.length; j++) {
+
+            if (todosQuizzes == meusQuizzesArray) {
+
+            }
+        }
+
+    }
+
+}
+
 // fim script Ana 
 
 
