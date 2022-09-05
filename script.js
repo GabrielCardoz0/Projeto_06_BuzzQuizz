@@ -325,7 +325,7 @@ function verificarInformacoes() {
         const promessaDoServidor = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', ObjetoQuizz);
 
 
-        promessaDoServidor.then(QuizzProntinho());
+        promessaDoServidor.then(QuizzProntinho);
 
 
         function QuizzProntinho(respostaDoServidor) {
