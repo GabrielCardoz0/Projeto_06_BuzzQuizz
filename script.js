@@ -2,24 +2,47 @@
 
 function carregarQuizzes() {
     const promessa = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
-    promessa.then(renderizarQuizzes);
+    promessa.then(separarQuizzes);
+
+}
+function irParaResponderQuizz(id) {
+    localStorage.setItem("id-do-quizz-a-ser-respondido", `${id}`);
+    window.location.replace("http://127.0.0.1:5500/html/tela2.html");
 
 }
 
 
-function renderizarQuizzes(resposta) {
-    console.log(resposta.data);
-
-    const todosQuizzes = resposta.data;
+function renderizarQuizzes(seusQuizzes, outrosQuizzes) {
 
     const ul = document.querySelector(".box-quizzes");
 
-    for (let i = 0; i < todosQuizzes.length; i++) {
+    for (let i = 0; i < outrosQuizzes.length; i++) {
         ul.innerHTML += `
+                        <li class="caixa-quizz" onclick ="irParaResponderQuizz(${outrosQuizzes[i].id})">
+                            <div class="gradient"></div>
+                            <img src="${outrosQuizzes[i].image}" />
+                            <span>${outrosQuizzes[i].title}</span>
+                        </li>
+        `;
+    }
+    if (seusQuizzes.length == 0) {
+        const esconder = document.querySelector(".box-quizzes-criados")
+        esconder.classList.add("escondido");
+    } else {
+        const esconder = document.querySelector(".box-criar-quizz")
+        esconder.classList.add("escondido");
+    }
+
+
+
+    const ulDois = document.querySelector(".lista-seus-quizzes")
+
+    for (let i = 0; i < seusQuizzes.length; i++) {
+        ulDois.innerHTML += `
                     <li class="caixa-quizz">
                         <div class="gradient"></div>
-                        <img src="${todosQuizzes[i].image}" />
-                        <span>${todosQuizzes[i].title}</span>
+                        <img src="${seusQuizzes[i].image}" />
+                        <span>${seusQuizzes[i].title}</span>
                     </li>
         `;
 
@@ -30,24 +53,41 @@ function renderizarQuizzes(resposta) {
 
 }
 
+
 carregarQuizzes();
 
-function identicarMeusQuizzes(todosQuizzes) {
 
+function separarQuizzes(resposta) {
+    let seusQuizzesCriados = [];
+    let naoSaoSeusQuizzes = [];
+
+    const todosOsQuizzes = resposta.data;
     const meusQuizzesString = localStorage.getItem("Meus_Quizzes");
     const meusQuizzesArray = JSON.parse(meusQuizzesString);
 
-    for (let i = 0; i < todosQuizzes.length; i++) {
-        for (let j = 0; j < meusQuizzesArray.length; j++) {
+    for (let i = 0; i < todosOsQuizzes.length; i++) {
+        let deuMatch = false;
+        if (meusQuizzesArray != null) {
 
-            if (todosQuizzes == meusQuizzesArray) {
+            for (let j = 0; j < meusQuizzesArray.length; j++) {
+
+                if (todosOsQuizzes[i].id == meusQuizzesArray[j].id) {
+                    deuMatch = true;
+                    seusQuizzesCriados.push(todosOsQuizzes[i]);
+                }
 
             }
+        }
+        if (deuMatch == false) {
+            naoSaoSeusQuizzes.push(todosOsQuizzes[i]);
         }
 
     }
 
+    renderizarQuizzes(seusQuizzesCriados, naoSaoSeusQuizzes);
+
 }
+
 
 // fim script Ana 
 
@@ -316,8 +356,10 @@ let qtdPerguntas
 function responder() {
 
     const quizz = document.querySelector(".main")
+    const id = localStorage.getItem("id-do-quizz-a-ser-respondido");
 
-    axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/11783')
+
+    axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + id)
         // ALTERAR ID BASEADO NA TELA 1 !
 
         .then(response => {
