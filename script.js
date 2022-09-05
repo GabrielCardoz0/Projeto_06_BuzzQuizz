@@ -367,18 +367,22 @@ function fecharPáginaHTML3() {
 
 
 //Script Victoria//
-let qtdPerguntas
+let QuestoesRespondidas = 0;
+let resultado = 0;
+let resultadoFinal = 0;
+let qtdPerguntas;
+let levelsArray;
 
-function responder() {
+function responder(){
 
     const quizz = document.querySelector(".main")
-    const id = localStorage.getItem("id-do-quizz-a-ser-respondido");
-
+    // ALTERAR ID BASEADO NA TELA 1 !
     axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/11783')
-        // ALTERAR ID BASEADO NA TELA 1 !
-
-        .then(response => {
+    .then(response => {
+        
             let item = response.data;
+
+            levelsArray = item.levels
 
             let add = `<div class="titulo">
                 <img src="${item.image}" alt="Titulo">
@@ -387,58 +391,66 @@ function responder() {
 
             qtdPerguntas = item.questions.length;
 
-            for (var i = 0; i < item.questions.length; i++) {
+            for (var i = 0; i < item.questions.length; i++)
+            {
+                const quantidadeDeRespostas = item.questions[i].answers;
+                const sortido = quantidadeDeRespostas.sort(baguncar)
+        
+                function baguncar(){
+                    return 0.5 - Math.random()
+                }
                 add += `<div class="quizz">
                 <div class="pergunta">
                     <div class="cabecalho" style="background-color:${item.questions[i].color}">
                         <p class="ctitulo">${item.questions[i].title}</p>
                     </div>`
 
-                let contador = 0;
-                let quantidadeDePerguntas = item.questions[i].answers.length;
-                for (var j = 0; j < quantidadeDePerguntas; j++) {
-                    contador++;
-                    if (contador == 1) {
-                        add += `<div class="quadro">
-                            <div class="resposta ${item.questions[i].answers[j].isCorrectAnswer} quiz${i}${j}">
-                            <img src="${item.questions[i].answers[j].image}" alt="quiz${i}${j}">
-                            <p class="paragrafo">${item.questions[i].answers[j].text}</p>
+                    let contador = 0;
+                    let quantidadeDePerguntas = sortido.length;
+                    for (var j = 0; j < quantidadeDePerguntas; j++)
+                    {
+                        contador++;
+                        if(contador == 1){
+                            add += `<div class="quadro">
+                            <div class="resposta ${sortido[j].isCorrectAnswer} quiz${i}${j}">
+                            <img src="${sortido[j].image}" alt="quiz${i}${j}">
+                            <p class="paragrafo">${sortido[j].text}</p>
                             </div>`
-                        if (quantidadeDePerguntas == 3) {
-                            add += `</div>
-                                </div>`
+                            if(quantidadeDePerguntas == 3)
+                            {
+                                add += `</div>
+                                </div>`   
+                            }
                         }
-                    }
-                    if (contador == 2) {
-                        add += `<div class="resposta ${item.questions[i].answers[j].isCorrectAnswer} quiz${i}${j}">
-                            <img src="${item.questions[i].answers[j].image}" alt="quiz${i}${j}">
-                            <p class="paragrafo">${item.questions[i].answers[j].text}</p>
+                        if(contador == 2)
+                        {
+                        add += `<div class="resposta ${sortido[j].isCorrectAnswer} quiz${i}${j}">
+                            <img src="${sortido[j].image}" alt="quiz${i}${j}">
+                            <p class="paragrafo">${sortido[j].text}</p>
                             </div>
                             </div>`
 
-                        if (quantidadeDePerguntas == 2 || j == 3) {
-                            add += `</div>
-                                </div>`
-                        }
+                            if(quantidadeDePerguntas == 2 || j == 3)
+                            {
+                                add += `</div>
+                                </div>`   
+                            }
 
                         contador = 0;
+                        }
+
                     }
-
-                }
             }
+                                         
+            quizz.innerHTML = add;
 
-            quizz.innerHTML = add
-            console.log('fui adicionado')
+
         })
 
         .catch(error => {
             console.log(`responder: ${error}`)
-        });
+        }); 
 }
-
-
-responder();
-
 
 const main = document.querySelector('.main')
 let contador = 0;
@@ -453,72 +465,126 @@ main.addEventListener("click", function (e) {
     resposta_click.classList.add("escolhido");
 
     let resposta = document.querySelectorAll('.resposta')
-    for (let i = 0; i < resposta.length; i++) {
-        console.log()
-        if (!resposta[i].className.includes('escolhido')) {
-            if (alt[4] == resposta[i].className.split('quiz')[1][0]) {
-                resposta[i].classList.add("desabilitado");
+
+    for(let i = 0; i < resposta.length; i++){
+        if(!resposta[i].className.includes('escolhido'))
+            {
+                if(alt[4] == resposta[i].className.split('quiz')[1][0])
+                {
+                    resposta[i].classList.add("desabilitado");
+                }
+                
             }
-
-        }
-
-        if (!resposta[i].className.includes('true')) {
-            if (alt[4] == resposta[i].className.split('quiz')[1][0]) {
+        
+        if(!resposta[i].className.includes('true'))
+        {
+            if(alt[4] == resposta[i].className.split('quiz')[1][0])
+            {
                 resposta[i].classList.add("errado");
             }
-
+            
         }
 
-        else if (resposta[i].className.includes('true')) {
-            if (alt[4] == resposta[i].className.split('quiz')[1][0]) {
+        else if(resposta[i].className.includes('true'))
+        {
+            if(alt[4] == resposta[i].className.split('quiz')[1][0])
+            {
                 resposta[i].classList.add("certo");
             }
         }
     }
-
-});
-
-
-const botaoReiniciar = document.querySelector('.reiniciar')
-
-botaoReiniciar.addEventListener("click", function (e) {
-    const reiniciar = document.querySelector('div:last-child');
-
-    reiniciar.scrollIntoView({ block: "end", behavior: "smooth" });
-
-    let resposta = document.querySelectorAll('.resposta')
-
-    for (i = 0; i < resposta.length; i++) {
-
-        if (resposta[i].className.includes('certo')) {
-            resposta[i].classList.remove('certo')
-        }
-        else if (resposta[i].className.includes('errado')) {
-            resposta[i].classList.remove('errado')
-        }
-
-        if (resposta[i].className.includes('desabilitado')) {
-            resposta[i].classList.remove('desabilitado')
-        }
-        else if (resposta[i].className.includes('escolhido')) {
-            resposta[i].classList.remove('escolhido')
+    for(let i = 0; i < resposta.length; i++)
+    {
+        if(resposta[i].className.includes('escolhido') && resposta[i].className.includes('certo'))  
+        {
+            if(alt[4] == resposta[i].className.split('quiz')[1][0])
+            {
+                resultado++;
+            }
         }
     }
 
-})
+        resultadoFinal = Math.round((resultado/qtdPerguntas)*100)
+
+        QuestoesRespondidas++;
+        if(QuestoesRespondidas == qtdPerguntas)
+        {
+            let array = [];
+            for(let i = 0; i < levelsArray.length; i++)
+            {
+                array.push(Number(levelsArray[i].minValue))
+            }
+
+            let final = document.querySelector('.main')
+            let add2 = `<div class="final">`;
+            
+
+            let posicao;
+            for(let i = 0; i < array.length; i++)
+            {
+                if(resultadoFinal >= array[i])
+                {
+                  posicao = i
+                }
+            }
+
+                add2 = `<div class="topo">
+                <p>${resultadoFinal}% de acerto: ${levelsArray[posicao].title}</p>
+                </div>
+                <div class="menu">
+                <div class="imagem">
+                <img src="${levelsArray[posicao].image}" alt="Final">
+                </div>
+                <div class="texto">
+                <p>${levelsArray[posicao].text}</p>
+                </div>
+                </div>
+                </div>`;
+
+            final.innerHTML += add2
+        
+        }
+});
+
+responder();
+
+    const botaoReiniciar = document.querySelector('.reiniciar')
+
+    botaoReiniciar.addEventListener("click", function(e)
+    {
+    const reiniciar = document.querySelector('div:last-child');
+
+    reiniciar.scrollIntoView({block: "end", behavior: "smooth"});
+
+    let resposta = document.querySelectorAll('.resposta')
+
+    for(i = 0; i < resposta.length; i++){
+
+        if(resposta[i].className.includes('certo')){
+            resposta[i].classList.remove('certo')
+    }
+        else if(resposta[i].className.includes('errado')){
+            resposta[i].classList.remove('errado')
+    }
+
+    if(resposta[i].className.includes('desabilitado')){
+            resposta[i].classList.remove('desabilitado')
+    }
+        else if(resposta[i].className.includes('escolhido')){
+            resposta[i].classList.remove('escolhido')
+    }}
+    resultado = 0
+    resultadoFinal = 0
+    QuestoesRespondidas = 0
+    final = document.querySelector('.final')
+    remover = final.classList.add("escondido")
+    responder()
+    })
 
 
-const botaoHome = document.querySelector('.home')
-
-botaoHome.addEventListener("click", function (e) {
-    window.location = 'tela1.html'
-})
-
-
-function mostrarResultado() {
-
-}
-
-
+    const botaoHome = document.querySelector('.home')
+    
+    botaoHome.addEventListener("click", function(e){
+        window.location = 'tela1.html'})
 
 //Script Victoria//
