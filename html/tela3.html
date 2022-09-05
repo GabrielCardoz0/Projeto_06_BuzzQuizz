@@ -29,7 +29,7 @@
             <input type="url" placeholder="URL da imagem do seu quiz" class="urlImagemQuizz" value="">
             <input type="text" placeholder="Quantidade de perguntas do quizz (mín 3)" class="quantidadeDePerguntas"
                 value="" minlength="1" maxlength="2">
-            <input type="text" placeholder="Quantidade de níveis do quizz (mín 2)" class="quantidadeDeNiveis" value="">
+            <input type="text" placeholder="Quantidade de níveis do quizz (mín 2)" class="quantidadeDeNiveis">
         </div>
 
         <div class="botaoCriarPergunta" onclick="prosseguirTelaPerguntas(this)">Prosseguir para criar Quizz</div>
@@ -38,42 +38,33 @@
 
 
 
-    <div class="criePerguntas ">
+    <div class="criePerguntas escondido">
 
         <span class="ComeceComeço">Crie suas perguntas</span>
 
-        <!--
-        <div class="conteudoPergunta">
-
-            <span>Pergunta 1</span>
-
-            <input type="text" placeholder="Texto da pergunta" minlength="20">
-            <input type="text" placeholder="Cor de fundo da pergunta (hexadecimal #XXXXXX)">
-
-            <span>Resposta correta</span>
-            <input type="text" placeholder="Resposta correta">
-            <input type="url" name="" id="" placeholder="URL da imagem">
-
-            <span>Respostas incorretas (ao menos duas)</span>
-            <input type="text" placeholder="Resposta incorreta 1">
-            <input type="url" name="" id="" placeholder="URL da imagem 1">
-
-            <input type="text" placeholder="Resposta incorreta 2">
-            <input type="url" name="" id="" placeholder="URL da imagem 2">
-
-            <input type="text" placeholder="Resposta incorreta 3">
-            <input type="url" name="" id="" placeholder="URL da imagem 3">
-
-        </div>
-        -->
-
         <ul class="ListaCaixaPerguntas">
-
+            <!--
             <li class="perguntaN">
-                <span>Pergunta 1</span>
-                <ion-icon name="create-outline"></ion-icon>
+                <span>Pergunta N</span>
+                <ion-icon name="create-outline" onclick="editarPergunta(this)"></ion-icon>
             </li>
 
+            <li class="conteudoPergunta">
+                <span>Pergunta 1</span>
+                <input type="text" placeholder="Texto da pergunta" minlength="20">
+                <input type="color">
+                <span>Resposta correta</span>
+                <input type="text" placeholder="Resposta correta">
+                <input type="url" name="" id="" placeholder="URL da imagem">
+                <span>Respostas incorretas (ao menos duas)</span>
+                <input type="text" placeholder="Resposta incorreta 1">
+                <input type="url" name="" id="" placeholder="URL da imagem 1">
+                <input type="text" placeholder="Resposta incorreta 2">
+                <input type="url" name="" id="" placeholder="URL da imagem 2">
+                <input type="text" placeholder="Resposta incorreta 3">
+                <input type="url" name="" id="" placeholder="URL da imagem 3">
+            </li>
+        -->
         </ul>
 
 
@@ -87,21 +78,25 @@
 
         <span class="ComeceComeço">Agora, decida os níveis!</span>
 
-        <div class="conteudoNivel">
-            <span>Nível 1</span>
-            <input type="text" placeholder="Título do nível" minlength="10">
-            <input type="text" placeholder="% de acerto mínima (entre 0 e 100%)">
-            <input type="url" name="" id="" placeholder="URL da imagem do nível">
-            <input type="text" placeholder="Descrição do nível" minlength="30">
-            <textarea name="" id="" cols="10" rows="4" placeholder="Descrição do nível"></textarea>
-        </div>
+        <ul class='listaDeNiveis'>
+            <!--
+            <div class="conteudoNivel">
+                <span>Nível 1</span>
+                <input type="text" placeholder="Título do nível(mín 10 caracteres)">
+                <input type="text" placeholder="% de acerto mínima (entre 0 e 100%)">
+                <input type="url" name="" id="" placeholder="URL da imagem do nível">
+                <textarea name="" id="" cols="10" rows="4" placeholder="Descrição do nível (mín 30 caracteres)"></textarea>
+            </div>
+            -->
 
-        <div class="nivelN">
-            <span>Nivel 1</span>
-            <ion-icon name="create-outline"></ion-icon>
-        </div>
+            <li class="nivelN">
+                <span>Nivel 0 (Obrigatório)</span>
+                <ion-icon name="create-outline" onclick="editarNível(this)"></ion-icon>
+            </li>
 
-        <div class="finalizarQuizz">Finalizar Quizz</div>
+        </ul>
+
+        <div class="finalizarQuizz" onclick="verificarInformacoes()">Finalizar Quizz</div>
 
     </div>
 
@@ -111,15 +106,11 @@
         <span class="ComeceComeço">Seu quizz está pronto!</span>
 
         <div class="imagemQuizz">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUiiq4LRrvYkcZvKOz4Z7FuET5FKjtT5KohifApdabLFFEXGxKVWUGpA11Vznxr1CQtT0&usqp=CAU"
-                alt="">
-
-            <span>Título do quizz</span>
         </div>
 
         <div class="acessarQuizz">Acessar Quizz</div>
 
-        <div class="voltarHome">Voltar para home</div>
+        <div class="voltarHome" onclick="fecharPáginaHTML3()">Voltar para home</div>
 
     </div>
 

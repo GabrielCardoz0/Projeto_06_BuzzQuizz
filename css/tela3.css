@@ -126,6 +126,7 @@ textarea{
     margin: 14px 0 0 16px;
     padding-left: 10px;
 }
+
 .botaoCriarNiveis{
     background-color: #EC362D;
     width: 354px;
@@ -161,6 +162,7 @@ textarea{
 .conteudoNivel > input, .conteudoNivel > textarea{
     margin-left: 16px;
     margin-bottom: 14px;
+    padding-left: 10px;
 }
 .conteudoNivel > span{
     margin: 20px 0 12px 16px;
@@ -207,7 +209,6 @@ textarea{
     height: 100vh;
 }
 .imagemQuizz{
-    background-color: gray;
     border-radius: 15px;
     margin-top: 46px;
     display: flex;
